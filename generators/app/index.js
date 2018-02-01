@@ -45,12 +45,6 @@ module.exports = class extends Generator {
       },
       {
         type: 'input',
-        name: 'projectDisplayName',
-        message: '项目显示名称',
-        default: `life.homeworld.app.${this.appname}`
-      },
-      {
-        type: 'input',
         name: 'authorName',
         message: '开发者',
         default: '李茂峰'
@@ -65,7 +59,7 @@ module.exports = class extends Generator {
         type: 'input',
         name: 'authorUrl',
         message: '开发者网站',
-        default: 'homeworld.life'
+        default: 'https://homeworld.life'
       },
       {
         type: 'input',
@@ -81,20 +75,31 @@ module.exports = class extends Generator {
   }
 
   writing() {
-    this.fs.copy(this.templatePath('config'), this.destinationPath('config'));
+    const values = props => {
+      if (!props) {
+        return this.props;
+      }
+      this.props = { ...this.props, ...props };
+      return this.props;
+    };
 
-    // Fastlane
-    this.composeWith(require.resolve('../fastlane'), {
-      projectName: this.props.projectName
+    // Source
+    this.composeWith(require.resolve('../react-native'), {
+      projectName: this.props.projectName,
+      values
     });
 
     // IOS
     this.composeWith(require.resolve('../ios'), {
-      projectName: this.props.projectName
+      projectName: this.props.projectName,
+      values
     });
 
-    // Source
-    this.fs.copy(this.templatePath('src'), this.destinationPath('src'));
+    // Fastlane
+    this.composeWith(require.resolve('../fastlane'), {
+      projectName: this.props.projectName,
+      values
+    });
 
     // Gitignore
     this.fs.copy(
@@ -113,16 +118,6 @@ module.exports = class extends Generator {
       props: this.props
     });
 
-    // WallabyJS
-    this.fs.copy(this.templatePath('wallaby.js'), this.destinationPath('wallaby.js'));
-
-    // Package
-    this.fs.copyTpl(
-      this.templatePath('package.json'),
-      this.destinationPath('package.json'),
-      { props: this.props }
-    );
-
     // License
     this.composeWith(require.resolve('generator-license'), {
       name: this.props.authorName,
@@ -133,13 +128,23 @@ module.exports = class extends Generator {
   }
 
   install() {
-    /*
-    This.installDependencies({
+    this.installDependencies({
       npm: false,
       bower: false,
       yarn: true
+    }).then(() => {
+      if (!this.fs.exists(this.destinationPath('ios/Podfile'))) {
+        return;
+      }
+      if (this.fs.exists(this.destinationPath('ios/Pods/Manifest.lock'))) {
+        this.spawnCommand('pod', [
+          'update',
+          '--project-directory=ios',
+          '--no-repo-update'
+        ]);
+      } else {
+        this.spawnCommand('pod', ['install', '--project-directory=ios']);
+      }
     });
-    this.yarnInstall(['lodash'], { saveDev: true });
-    */
   }
 };

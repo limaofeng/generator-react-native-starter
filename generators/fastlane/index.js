@@ -18,23 +18,35 @@ module.exports = class extends Generator {
         message: '输入项目名称',
         default: this.options.projectName,
         when: this.options.projectName === null || this.options.projectName === undefined
+      },
+      {
+        type: 'input',
+        name: 'appIdentifier',
+        message: 'iOS App ID',
+        default: this.options.values().appIdentifier,
+        when:
+          this.options.values().appIdentifier === null ||
+          this.options.values().appIdentifier === undefined
       }
     ];
 
     return this.prompt(prompts).then(props => {
-      this.props = Object.assign(
-        {
-          projectName: this.options.projectName
-        },
-        props
+      this.options.values(
+        Object.assign(
+          {
+            ...this.options.values()
+          },
+          props
+        )
       );
     });
   }
 
   writing() {
+    const props = this.options.values();
     this.fs.copyTpl(this.sourceRoot(), this.destinationPath('fastlane'), {
-      projectName: this.props.projectName,
-      appIdentifier: `life.homeworld.app.${this.props.projectName}`,
+      projectName: props.projectName,
+      appIdentifier: props.appIdentifier,
       appleId: 'limaofeng@msn.com'
     });
     this.fs.copy(

@@ -361,10 +361,10 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = life.homeworld.app.<%=props.appIdentifier%>;
+				PRODUCT_BUNDLE_IDENTIFIER = <%=props.appIdentifier%>;
 				PRODUCT_NAME = <%=props.projectName%>;
 				PROVISIONING_PROFILE = "91c344c5-9c07-4835-9838-8729f87c141e";
-				PROVISIONING_PROFILE_SPECIFIER = "match Development life.homeworld.app.<%=props.projectName%>";
+				PROVISIONING_PROFILE_SPECIFIER = "match Development <%=props.appIdentifier%>";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
@@ -385,10 +385,10 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = life.homeworld.app.<%=props.projectName%>;
+				PRODUCT_BUNDLE_IDENTIFIER = <%=props.appIdentifier%>;
 				PRODUCT_NAME = <%=props.projectName%>;
 				PROVISIONING_PROFILE = "12cf0d2b-025f-499a-b48c-fb0c1b7d7013";
-				PROVISIONING_PROFILE_SPECIFIER = "match AppStore life.homeworld.app.<%=props.projectName%>";
+				PROVISIONING_PROFILE_SPECIFIER = "match AppStore <%=props.appIdentifier%>";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;
@@ -504,7 +504,7 @@
 				INFOPLIST_FILE = <%=props.projectName%>UITests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = life.homeworld.app.<%=props.projectName%>UITests;
+				PRODUCT_BUNDLE_IDENTIFIER = <%=props.appIdentifier%>UITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "12cf0d2b-025f-499a-b48c-fb0c1b7d7013";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
@@ -532,7 +532,7 @@
 				INFOPLIST_FILE = <%=props.projectName%>UITests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = life.homeworld.app.<%=props.projectName%>UITests;
+				PRODUCT_BUNDLE_IDENTIFIER = <%=props.appIdentifier%>UITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "12cf0d2b-025f-499a-b48c-fb0c1b7d7013";
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";

@@ -13,6 +13,9 @@ ios/Pods
 ios/build
 ios/Podfile.lock
 
+# android
+android/.gradle
+
 # fastlane
 fastlane/report.xml
 fastlane/screenshots/*/*.png
