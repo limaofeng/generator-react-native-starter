@@ -37,7 +37,7 @@ end
 def sync_code_signings(options = {})
   if options[:type].kind_of? String then
     sync_code_signing(
-      git_url: 'git@gitlab.com:homeworld.life/certificates.git',
+      git_url: '<%=gitUrl%>',
       app_identifier: '<%=appIdentifier%>',
       keychain_name: options[:keychain_name],
       keychain_password: options[:keychain_password],
@@ -54,7 +54,7 @@ end
 
 platform :ios do
   before_all do
-    ENV["SLACK_URL"] = "https://hooks.slack.com/services/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"
+    ENV["SLACK_URL"] = "<%=slackUrl%>"
   end
 
   keychain_name = "ios-build.keychain"

@@ -1,4 +1,4 @@
-git_url "git@gitlab.com:homeworld.life/certificates.git"
+git_url "<%=gitUrl%>"
 
 type "development" # The default type, can be: appstore, adhoc, enterprise or development
 

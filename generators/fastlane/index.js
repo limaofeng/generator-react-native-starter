@@ -24,9 +24,7 @@ module.exports = class extends Generator {
         name: 'appIdentifier',
         message: 'iOS App ID',
         default: this.options.values().appIdentifier,
-        when:
-          this.options.values().appIdentifier === null ||
-          this.options.values().appIdentifier === undefined
+        when: this.options.values().appIdentifier === null || this.options.values().appIdentifier === undefined
       }
     ];
 
@@ -47,11 +45,11 @@ module.exports = class extends Generator {
     this.fs.copyTpl(this.sourceRoot(), this.destinationPath('fastlane'), {
       projectName: props.projectName,
       appIdentifier: props.appIdentifier,
-      appleId: 'limaofeng@msn.com'
+      appleId: 'limaofeng@msn.com',
+      teamId: 'VLH995V894',
+      gitUrl: 'git@gitlab.com:homeworld.life/certificates.git',
+      slackUrl: 'https://hooks.slack.com/services/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'
     });
-    this.fs.copy(
-      this.templatePath('../screenshots'),
-      this.destinationPath('fastlane/screenshots')
-    );
+    this.fs.copy(this.templatePath('../screenshots'), this.destinationPath('fastlane/screenshots'));
   }
 };
