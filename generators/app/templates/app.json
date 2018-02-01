@@ -1,0 +1,4 @@
+{
+  "name": "<%=props.projectName%>",
+  "displayName": "<%=props.projectDisplayName%>"
+}
