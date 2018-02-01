@@ -44,6 +44,11 @@
     "*.js": ["eslint --fix", "git add"],
     "*.json": ["prettier --write", "git add"]
   },
+  "prettier": {
+    "tabWidth": 2,
+    "printWidth": 120,
+    "singleQuote": true
+  },
   "eslintConfig": {
     "extends": ["xo", "prettier"],
     "env": {

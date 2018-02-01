@@ -6,13 +6,7 @@ const yosay = require('yosay');
 module.exports = class extends Generator {
   prompting() {
     // Have Yeoman greet the user.
-    this.log(
-      yosay(
-        'Welcome to the groovy ' +
-          chalk.red('generator-react-native-starter') +
-          ' generator!'
-      )
-    );
+    this.log(yosay('Welcome to the groovy ' + chalk.red('generator-react-native-starter') + ' generator!'));
 
     const prompts = [
       // {
@@ -102,10 +96,7 @@ module.exports = class extends Generator {
     });
 
     // Gitignore
-    this.fs.copy(
-      this.templatePath('.gitattributes'),
-      this.destinationPath('.gitattributes')
-    );
+    this.fs.copy(this.templatePath('.gitattributes'), this.destinationPath('.gitattributes'));
     this.fs.copy(this.templatePath('.gitignore'), this.destinationPath('.gitignore'));
 
     // APP Info
@@ -137,14 +128,18 @@ module.exports = class extends Generator {
         return;
       }
       if (this.fs.exists(this.destinationPath('ios/Pods/Manifest.lock'))) {
-        this.spawnCommand('pod', [
-          'update',
-          '--project-directory=ios',
-          '--no-repo-update'
-        ]);
+        this.spawnCommand('pod', ['update', '--project-directory=ios', '--no-repo-update']);
       } else {
         this.spawnCommand('pod', ['install', '--project-directory=ios']);
       }
     });
+  }
+
+  end() {
+    this.spawnCommandSync('git', ['init']);
+    this.repo = `git@github.com:limaofeng/${this.props.projectName}.git`;
+    this.spawnCommandSync('git', ['remote', 'add', 'origin', this.repo]);
+    this.spawnCommandSync('git', ['add', '--all']);
+    this.spawnCommandSync('git', ['commit', '-m', '"initial commit from generator"']);
   }
 };
