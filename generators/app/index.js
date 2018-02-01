@@ -136,6 +136,9 @@ module.exports = class extends Generator {
   }
 
   end() {
+    if (this.fs.exists(this.destinationPath('.git/config'))) {
+      return;
+    }
     this.spawnCommandSync('git', ['init']);
     this.repo = `git@github.com:limaofeng/${this.props.projectName}.git`;
     this.spawnCommandSync('git', ['remote', 'add', 'origin', this.repo]);
