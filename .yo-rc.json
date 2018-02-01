@@ -2,8 +2,7 @@
   "generator-node": {
     "promptValues": {
       "authorName": "李茂峰",
-      "authorEmail": "limaofeng@msn.com",
-      "authorUrl": "http://github.com/limaofeng/react-native-starter"
+      "authorEmail": "limaofeng@msn.com"
     }
   }
 }
