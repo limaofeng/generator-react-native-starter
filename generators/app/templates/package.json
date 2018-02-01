@@ -3,8 +3,9 @@
   "version": "<%=props.projectVersion%>",
   "private": true,
   "author": {
-    "name": "<%=props.projectAuthor%>",
-    "email": "<%=props.projectAuthorEmail%>"
+    "name": "<%=props.authorName%>",
+    "email": "<%=props.authorEmail%>",
+    "url": "<%=props.authorUrl%>"
   },
   "scripts": {
     "precommit": "lint-staged",
@@ -41,61 +42,36 @@
     "singleQuote": true
   },
   "lint-staged": {
-    "src/**/*.{js,jsx}": [
-      "prettier --write",
-      "git add"
-    ]
+    "src/**/*.{js,jsx}": ["prettier --write", "git add"]
   },
   "jest": {
     "preset": "react-native",
-    "setupFiles": [
-      "<rootDir>/config/jest/setupTests.js"
-    ],
-    "testMatch": [
-      "<rootDir>/src/**/__tests__/**/*.test.js?(x)"
-    ],
+    "setupFiles": ["<rootDir>/config/jest/setupTests.js"],
+    "testMatch": ["<rootDir>/src/**/__tests__/**/*.test.js?(x)"],
     "transform": {
       "^.+\\.(js|jsx)$": "<rootDir>/node_modules/babel-jest",
       "^(?!.*\\.(js|jsx)$)": "<rootDir>/config/jest/fileTransform.js"
     },
     "testEnvironment": "node",
-    "collectCoverageFrom": [
-      "src/**/*.{js,jsx}"
-    ],
+    "collectCoverageFrom": ["src/**/*.{js,jsx}"],
     "coverageDirectory": "./coverage/",
     "collectCoverage": true,
-    "coveragePathIgnorePatterns": [
-      "<rootDir>/config/jest/setupTests.js"
-    ],
-    "modulePathIgnorePatterns": [
-      "/node_modules/.*/react-native/",
-      "/node_modules/.*/react/"
-    ],
-    "transformIgnorePatterns": [
-      "/node_modules/(?!react-native|react-navigation)/"
-    ]
+    "coveragePathIgnorePatterns": ["<rootDir>/config/jest/setupTests.js"],
+    "modulePathIgnorePatterns": ["/node_modules/.*/react-native/", "/node_modules/.*/react/"],
+    "transformIgnorePatterns": ["/node_modules/(?!react-native|react-navigation)/"]
   },
   "babel": {
-    "presets": [
-      "babel-preset-react-native-stage-0/decorator-support"
-    ],
+    "presets": ["babel-preset-react-native-stage-0/decorator-support"],
     "env": {
       "development": {
-        "plugins": [
-          "transform-react-jsx-source"
-        ]
+        "plugins": ["transform-react-jsx-source"]
       }
     }
   },
   "eslintConfig": {
     "extends": "airbnb",
     "parser": "babel-eslint",
-    "plugins": [
-      "react",
-      "jsx-a11y",
-      "import",
-      "prettier"
-    ],
+    "plugins": ["react", "jsx-a11y", "import", "prettier"],
     "env": {
       "jasmine": true
     },
@@ -115,15 +91,8 @@
       "function-paren-newline": "off",
       "react/prefer-stateless-function": "off",
       "no-console": 1,
-      "max-len": [
-        2,
-        120,
-        4
-      ],
-      "arrow-parens": [
-        "error",
-        "as-needed"
-      ],
+      "max-len": [2, 120, 4],
+      "arrow-parens": ["error", "as-needed"],
       "consistent-return": 0,
       "no-confusing-arrow": 0,
       "no-shadow": 0,
@@ -143,26 +112,19 @@
       "import/no-unresolved": [
         2,
         {
-          "ignore": [
-            ".png^"
-          ]
+          "ignore": [".png^"]
         }
       ],
       "jsx-a11y/label-has-for": 0,
       "jsx-a11y/anchor-is-valid": 0,
       "jsx-a11y/click-events-have-key-events": 0,
       "react/no-multi-comp": 0,
-      "react/no-array-index-key": [
-        1
-      ],
+      "react/no-array-index-key": [1],
       "react/forbid-prop-types": 0,
       "react/jsx-filename-extension": [
         1,
         {
-          "extensions": [
-            ".js",
-            ".jsx"
-          ]
+          "extensions": [".js", ".jsx"]
         }
       ]
     }

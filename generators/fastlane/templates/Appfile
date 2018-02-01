@@ -1,4 +1,4 @@
-app_identifier "life.homeworld.app.vpser" # The bundle identifier of your app
+app_identifier "<%=appIdentifier%>" # The bundle identifier of your app
 apple_id "limaofeng@msn.com" # Your Apple email address
 
 team_id "VLH995V894" # Developer Portal Team ID

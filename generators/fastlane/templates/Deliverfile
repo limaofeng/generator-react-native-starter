@@ -7,7 +7,7 @@
 # Feel free to remove the following line if you use fastlane (which you should)
 
 # 1 app_identifier
-app_identifier "life.homeworld.app.vpser" # The bundle identifier of your app
+app_identifier "<%=appIdentifier%>" # The bundle identifier of your app
 
 # 2 用户名,Apple ID电子邮件地址
 username "limaofeng@msn.com" # your Apple ID user
@@ -18,7 +18,7 @@ supportedLanguages = {
 }
 
 # 4 提交审核信息
-submission_information({    
+submission_information({
   export_compliance_encryption_updated: false,
   export_compliance_uses_encryption: false,
   content_rights_contains_third_party_content: false,

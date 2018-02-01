@@ -361,7 +361,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = life.homeworld.app.<%=props.projectName%>;
+				PRODUCT_BUNDLE_IDENTIFIER = life.homeworld.app.<%=props.appIdentifier%>;
 				PRODUCT_NAME = <%=props.projectName%>;
 				PROVISIONING_PROFILE = "91c344c5-9c07-4835-9838-8729f87c141e";
 				PROVISIONING_PROFILE_SPECIFIER = "match Development life.homeworld.app.<%=props.projectName%>";
