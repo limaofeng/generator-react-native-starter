@@ -1,37 +1,36 @@
 {
-  "name": "<%=props.projectName%>",
-  "version": "<%=props.projectVersion%>",
-  "private": true,
+  "name": "react-native-starter",
+  "version": "0.0.0",
+  "license": "MIT",
   "author": {
-    "name": "<%=props.authorName%>",
-    "email": "<%=props.authorEmail%>",
-    "url": "<%=props.authorUrl%>"
+    "name": "limaofeng",
+    "email": "limaofeng@msn.com",
+    "url": "homeworld.life"
   },
   "scripts": {
     "precommit": "lint-staged",
     "start": "react-native start",
     "android": "react-native run-android",
-    "ios": "react-native run-ios",
+    "ios": "react-native run-ios --simulator \"iPhone X\"",
     "test": "jest"
   },
   "dependencies": {
     "react": "16.2.0",
-    "react-native": "0.52.2",
-    "react-navigation": "^1.0.0-beta.27"
+    "react-native": "facebook/react-native#0.53-stable"
   },
   "devDependencies": {
     "babel-eslint": "^8.2.1",
     "babel-preset-react-native-stage-0": "^1.0.1",
     "enzyme": "^3.3.0",
     "enzyme-adapter-react-16": "^1.1.1",
-    "eslint": "^4.16.0",
+    "eslint": "^4.18.0",
     "eslint-config-airbnb": "^16.1.0",
     "eslint-plugin-import": "^2.8.0",
     "eslint-plugin-jsx-a11y": "^6.0.3",
-    "eslint-plugin-prettier": "^2.5.0",
-    "eslint-plugin-react": "^7.6.1",
-    "jest": "^22.1.4",
-    "lint-staged": "^6.1.0",
+    "eslint-plugin-prettier": "^2.6.0",
+    "eslint-plugin-react": "^7.7.0",
+    "jest": "^22.3.0",
+    "lint-staged": "^6.1.1",
     "prettier": "^1.10.2",
     "react-dom": "^16.2.0",
     "react-test-renderer": "16.2.0"

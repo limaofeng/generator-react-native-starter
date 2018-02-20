@@ -7,10 +7,10 @@
 # Feel free to remove the following line if you use fastlane (which you should)
 
 # 1 app_identifier
-app_identifier "<%=appIdentifier%>" # The bundle identifier of your app
+app_identifier "<%=ios.appIdentifier%>" # The bundle identifier of your app
 
 # 2 用户名,Apple ID电子邮件地址
-username "<%=appleId%>" # your Apple ID user
+username "<%=ios.appleId%>" # your Apple ID user
 
 # 3 支持语言
 supportedLanguages = {

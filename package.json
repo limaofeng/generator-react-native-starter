@@ -3,10 +3,12 @@
   "version": "0.0.0",
   "description": "react-native-starter",
   "homepage": "https://github.com/limaofeng/generator-react-native-starter",
+  "repository": "limaofeng/generator-react-native-starter",
+  "license": "MIT",
   "author": {
     "name": "李茂峰",
     "email": "limaofeng@msn.com",
-    "url": "http://github.com/limaofeng/react-native-starter"
+    "url": "http://homeworld.life"
   },
   "files": ["generators"],
   "main": "generators/index.js",
@@ -28,6 +30,7 @@
   "dependencies": {
     "chalk": "^2.1.0",
     "generator-license": "^5.2.0",
+    "lodash": "^4.17.5",
     "yeoman-generator": "^2.0.1",
     "yosay": "^2.0.1"
   },
@@ -41,7 +44,7 @@
     "test": "jest"
   },
   "lint-staged": {
-    "*.js": ["eslint --fix", "git add"],
+    "generators/*/index.js": ["eslint --fix", "git add"],
     "*.json": ["prettier --write", "git add"]
   },
   "prettier": {
@@ -65,7 +68,5 @@
       ]
     },
     "plugins": ["prettier"]
-  },
-  "repository": "limaofeng/generator-react-native-starter",
-  "license": "MIT"
+  }
 }

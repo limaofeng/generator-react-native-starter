@@ -1,6 +1,6 @@
 //
-//  <%=props.projectName%>UITests.swift
-//  <%=props.projectName%>UITests
+//  <%=project.name%>UITests.swift
+//  <%=project.name%>UITests
 //
 //  Created by 李茂峰 on 17/01/2018.
 //  Copyright © 2018 Facebook. All rights reserved.
@@ -8,7 +8,7 @@
 
 import XCTest
 
-class <%=props.projectName%>UITests: XCTestCase {
+class <%=project.name%>UITests: XCTestCase {
 
     override func setUp() {
         super.setUp()

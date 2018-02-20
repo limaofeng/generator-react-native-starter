@@ -1,9 +1,52 @@
 'use strict';
 const Generator = require('yeoman-generator');
+const lodash = require('lodash');
 const chalk = require('chalk');
 const yosay = require('yosay');
 
 module.exports = class extends Generator {
+  constructor(args, opts) {
+    super(args, opts);
+    this._props = {};
+    this._blocks = {};
+    this._dependencies = {};
+    this._devDependencies = {};
+    this.afterInstall = new Promise(resolve => {
+      this._resolveAfterInstall = () => resolve();
+    });
+  }
+
+  get dependencies() {
+    return this._dependencies;
+  }
+
+  get devDependencies() {
+    return this._devDependencies;
+  }
+
+  set dependencies(dependencies) {
+    this._dependencies = { ...this._dependencies, ...dependencies };
+  }
+
+  set devDependencies(devDependencies) {
+    this._devDependencies = { ...this._devDependencies, ...devDependencies };
+  }
+
+  get props() {
+    return this._props;
+  }
+
+  set props(props) {
+    lodash.merge(this._props, props);
+  }
+
+  blocks(file, key, value) {
+    if (key) {
+      this._blocks[file] = this._blocks[file] || {};
+      this._blocks[file][key] = value;
+    }
+    return this._blocks[file] || {};
+  }
   prompting() {
     // Have Yeoman greet the user.
     this.log(yosay('Welcome to the groovy ' + chalk.red('generator-react-native-starter') + ' generator!'));
@@ -27,37 +70,37 @@ module.exports = class extends Generator {
       // },
       {
         type: 'input',
-        name: 'projectName',
+        name: 'project.name',
         message: '输入项目名称',
         default: this.appname
       },
       {
         type: 'input',
-        name: 'projectDisplayName',
+        name: 'project.displayName',
         message: '项目显示名称',
         default: this.appname
       },
       {
         type: 'input',
-        name: 'authorName',
+        name: 'author.name',
         message: '开发者',
         default: '李茂峰'
       },
       {
         type: 'input',
-        name: 'authorEmail',
+        name: 'author.email',
         message: '开发者邮箱',
         default: 'limaofeng@msn.com'
       },
       {
         type: 'input',
-        name: 'authorUrl',
+        name: 'author.url',
         message: '开发者网站',
         default: 'https://homeworld.life'
       },
       {
         type: 'input',
-        name: 'projectVersion',
+        name: 'project.version',
         message: '项目版本号',
         default: '0.0.1'
       }
@@ -69,51 +112,49 @@ module.exports = class extends Generator {
   }
 
   writing() {
-    const values = props => {
-      if (!props) {
-        return this.props;
-      }
-      this.props = { ...this.props, ...props };
-      return this.props;
-    };
+    // Package
+    this.fs.copy(this.templatePath('package.json'), this.destinationPath('package.json'));
+    this.fs.extendJSON(this.destinationPath('package.json'), {
+      name: this.props.project.name,
+      version: this.props.project.version,
+      author: this.props.author
+    });
+
+    // Config
+    this.fs.copy(this.templatePath('config'), this.destinationPath('config'));
 
     // Source
-    this.composeWith(require.resolve('../react-native'), {
-      projectName: this.props.projectName,
-      values
-    });
+    this.fs.copy(this.templatePath('src'), this.destinationPath('src'));
+
+    // WallabyJS
+    this.fs.copy(this.templatePath('wallaby.js'), this.destinationPath('wallaby.js'));
+
+    // Plugins
+    const plugins = this.composeWith(require.resolve('../plugins'), { base: this });
 
     // IOS
-    this.composeWith(require.resolve('../ios'), {
-      projectName: this.props.projectName,
-      values
-    });
+    this.composeWith(require.resolve('../ios'), { base: this });
 
     // Fastlane
-    this.composeWith(require.resolve('../fastlane'), {
-      projectName: this.props.projectName,
-      values
-    });
+    this.composeWith(require.resolve('../fastlane'), { base: this });
 
-    // Gitignore
-    this.fs.copy(this.templatePath('.gitattributes'), this.destinationPath('.gitattributes'));
-    this.fs.copy(this.templatePath('.gitignore'), this.destinationPath('.gitignore'));
+    // Git
+    this.composeWith(require.resolve('../git'), { base: this });
 
     // APP Info
     this.fs.copyTpl(this.templatePath('app.json'), this.destinationPath('app.json'), {
-      props: this.props
+      project: this.props.project
     });
 
     // Index.js
     this.fs.copyTpl(this.templatePath('index.js'), this.destinationPath('index.js'), {
-      props: this.props
+      project: this.props.project
     });
 
     // License
     this.composeWith(require.resolve('generator-license'), {
-      name: this.props.authorName,
-      email: this.props.authorEmail,
-      website: this.props.authorUrl,
+      ...this.props.author,
+      website: this.props.author.url,
       license: 'MIT'
     });
   }
@@ -124,25 +165,7 @@ module.exports = class extends Generator {
       bower: false,
       yarn: true
     }).then(() => {
-      if (!this.fs.exists(this.destinationPath('ios/Podfile'))) {
-        return;
-      }
-      if (this.fs.exists(this.destinationPath('ios/Pods/Manifest.lock'))) {
-        this.spawnCommand('pod', ['update', '--project-directory=ios', '--no-repo-update']);
-      } else {
-        this.spawnCommand('pod', ['install', '--project-directory=ios']);
-      }
+      this._resolveAfterInstall();
     });
-  }
-
-  end() {
-    if (this.fs.exists(this.destinationPath('.git/config'))) {
-      return;
-    }
-    this.spawnCommandSync('git', ['init']);
-    this.repo = `git@github.com:limaofeng/${this.props.projectName}.git`;
-    this.spawnCommandSync('git', ['remote', 'add', 'origin', this.repo]);
-    this.spawnCommandSync('git', ['add', '--all']);
-    this.spawnCommandSync('git', ['commit', '-m', '"initial commit from generator"']);
   }
 };

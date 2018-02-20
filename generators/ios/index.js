@@ -4,81 +4,66 @@ const Generator = require('yeoman-generator');
 module.exports = class extends Generator {
   constructor(args, opts) {
     super(args, opts);
-    this.option('projectName', {
-      type: String,
-      desc: '项目名称',
-      required: false
-    });
+    this.base = opts.base;
   }
+  get props() {
+    return (this.base && this.base.props) || {};
+  }
+
+  set props(props) {
+    this.base.props = props;
+  }
+
   prompting() {
     const prompts = [
       {
         type: 'input',
-        name: 'projectName',
-        message: '输入项目名称',
-        default: this.options.projectName,
-        when: this.options.projectName === null || this.options.projectName === undefined
-      },
-      {
-        type: 'input',
-        name: 'appIdentifier',
+        name: 'ios.appIdentifier',
         message: 'iOS App ID',
-        default: `life.homeworld.app.${this.options.projectName || this.appname}`
+        default: `life.homeworld.app.${this.props.project.name || this.appname}`
       }
     ];
 
     return this.prompt(prompts).then(props => {
-      this.options.values(
-        Object.assign(
-          {
-            ...this.options.values()
-          },
-          props
-        )
-      );
+      this.props = props;
     });
   }
 
   writing() {
-    const props = this.options.values();
+    const { project } = this.props;
     this.fs.copyTpl(this.templatePath('Podfile'), this.destinationPath('ios/Podfile'), {
-      props
+      project
     });
-    this.fs.copyTpl(
-      this.templatePath('vpser'),
-      this.destinationPath(`ios/${props.projectName}`),
-      { props }
-    );
-    this.fs.copyTpl(
-      this.templatePath('vpser.xcodeproj'),
-      this.destinationPath(`ios/${props.projectName}.xcodeproj`),
-      { props }
-    );
+    this.fs.copyTpl(this.templatePath('vpser'), this.destinationPath(`ios/${project.name}`), { project });
+    this.fs.copyTpl(this.templatePath('vpser.xcodeproj'), this.destinationPath(`ios/${project.name}.xcodeproj`), {
+      project,
+      ios: this.props.ios
+    });
     this.fs.move(
-      this.destinationPath(
-        `ios/${props.projectName}.xcodeproj/xcshareddata/xcschemes/vpser.xcscheme`
-      ),
-      this.destinationPath(
-        `ios/${props.projectName}.xcodeproj/xcshareddata/xcschemes/${
-          props.projectName
-        }.xcscheme`
-      )
+      this.destinationPath(`ios/${project.name}.xcodeproj/xcshareddata/xcschemes/vpser.xcscheme`),
+      this.destinationPath(`ios/${project.name}.xcodeproj/xcshareddata/xcschemes/${project.name}.xcscheme`)
     );
-    this.fs.copyTpl(
-      this.templatePath('vpser.xcworkspace'),
-      this.destinationPath(`ios/${props.projectName}.xcworkspace`),
-      { props }
-    );
-    this.fs.copyTpl(
-      this.templatePath('vpserUITests'),
-      this.destinationPath(`ios/${props.projectName}UITests`),
-      { props }
-    );
+    this.fs.copyTpl(this.templatePath('vpser.xcworkspace'), this.destinationPath(`ios/${project.name}.xcworkspace`), {
+      project
+    });
+    this.fs.copyTpl(this.templatePath('vpserUITests'), this.destinationPath(`ios/${project.name}UITests`), {
+      project
+    });
     this.fs.move(
-      this.destinationPath(`ios/${props.projectName}UITests/vpserUITests.swift`),
-      this.destinationPath(
-        `ios/${props.projectName}UITests/${props.projectName}UITests.swift`
-      )
+      this.destinationPath(`ios/${project.name}UITests/vpserUITests.swift`),
+      this.destinationPath(`ios/${project.name}UITests/${project.name}UITests.swift`)
     );
+  }
+  install() {
+    this.base.afterInstall.then(() => {
+      if (!this.fs.exists(this.destinationPath('ios/Podfile'))) {
+        return;
+      }
+      if (this.fs.exists(this.destinationPath('ios/Pods/Manifest.lock'))) {
+        this.spawnCommand('pod', ['update', '--project-directory=ios', '--no-repo-update']);
+      } else {
+        this.spawnCommand('pod', ['install', '--project-directory=ios']);
+      }
+    });
   }
 };

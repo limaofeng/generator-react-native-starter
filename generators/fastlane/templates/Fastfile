@@ -25,11 +25,11 @@ def prepare_version(options = {})
   end
   increment_version_number(
       version_number: options[:version],
-      xcodeproj: "./ios/<%=projectName%>.xcodeproj"
+      xcodeproj: "./ios/<%=project.name%>.xcodeproj"
   )
   increment_build_number(
       build_number: options[:build],
-      xcodeproj: "./ios/<%=projectName%>.xcodeproj"
+      xcodeproj: "./ios/<%=project.name%>.xcodeproj"
   )
 end
 
@@ -37,8 +37,8 @@ end
 def sync_code_signings(options = {})
   if options[:type].kind_of? String then
     sync_code_signing(
-      git_url: '<%=gitUrl%>',
-      app_identifier: '<%=appIdentifier%>',
+      git_url: '<%=ios.certificates.gitUrl%>',
+      app_identifier: '<%=ios.appIdentifier%>',
       keychain_name: options[:keychain_name],
       keychain_password: options[:keychain_password],
       type: options[:type],
@@ -54,7 +54,7 @@ end
 
 platform :ios do
   before_all do
-    ENV["SLACK_URL"] = "<%=slackUrl%>"
+    ENV["SLACK_URL"] = "<%=ci.slackUrl%>"
   end
 
   keychain_name = "ios-build.keychain"
@@ -80,7 +80,7 @@ platform :ios do
   lane :build do
     prepare_version
     cocoapods(podfile: "./ios/Podfile")
-    build_app(scheme: "<%=projectName%>", workspace:"./ios/<%=projectName%>.xcworkspace", output_directory: "./ios/build", silent: true, clean: true)
+    build_app(scheme: "<%=project.name%>", workspace:"./ios/<%=project.name%>.xcworkspace", output_directory: "./ios/build", silent: true, clean: true)
   end
 
   desc "提交一个新的测试版本 Apple TestFlight"
@@ -110,7 +110,7 @@ platform :ios do
     prepare_version
     cocoapods(podfile: "./ios/Podfile")
     screenshot
-    build_app(scheme: "<%=projectName%>", workspace:"./ios/<%=projectName%>.xcworkspace", output_directory: "./ios/build", silent: true, clean: true) # more options available
+    build_app(scheme: "<%=project.name%>", workspace:"./ios/<%=project.name%>.xcworkspace", output_directory: "./ios/build", silent: true, clean: true) # more options available
     upload_to_app_store(force: true)
   end
 

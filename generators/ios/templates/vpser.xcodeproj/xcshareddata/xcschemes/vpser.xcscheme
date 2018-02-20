@@ -29,9 +29,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-               BuildableName = "<%=props.projectName%>.app"
-               BlueprintName = "<%=props.projectName%>"
-               ReferencedContainer = "container:<%=props.projectName%>.xcodeproj">
+               BuildableName = "<%=project.name%>.app"
+               BlueprintName = "<%=project.name%>"
+               ReferencedContainer = "container:<%=project.name%>.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -48,9 +48,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "BFD3DC66200F4C6100ED2CDD"
-               BuildableName = "<%=props.projectName%>UITests.xctest"
-               BlueprintName = "<%=props.projectName%>UITests"
-               ReferencedContainer = "container:<%=props.projectName%>.xcodeproj">
+               BuildableName = "<%=project.name%>UITests.xctest"
+               BlueprintName = "<%=project.name%>UITests"
+               ReferencedContainer = "container:<%=project.name%>.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -58,9 +58,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "<%=props.projectName%>.app"
-            BlueprintName = "<%=props.projectName%>"
-            ReferencedContainer = "container:<%=props.projectName%>.xcodeproj">
+            BuildableName = "<%=project.name%>.app"
+            BlueprintName = "<%=project.name%>"
+            ReferencedContainer = "container:<%=project.name%>.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -82,9 +82,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "<%=props.projectName%>.app"
-            BlueprintName = "<%=props.projectName%>"
-            ReferencedContainer = "container:<%=props.projectName%>.xcodeproj">
+            BuildableName = "<%=project.name%>.app"
+            BlueprintName = "<%=project.name%>"
+            ReferencedContainer = "container:<%=project.name%>.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -101,9 +101,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "<%=props.projectName%>.app"
-            BlueprintName = "<%=props.projectName%>"
-            ReferencedContainer = "container:<%=props.projectName%>.xcodeproj">
+            BuildableName = "<%=project.name%>.app"
+            BlueprintName = "<%=project.name%>"
+            ReferencedContainer = "container:<%=project.name%>.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
