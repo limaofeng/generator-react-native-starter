@@ -5,13 +5,10 @@ const helpers = require('yeoman-test');
 
 describe('generator-react-native-starter:plugins', () => {
   beforeAll(() => {
-    return helpers.run(path.join(__dirname, '../generators/plugins'))
-      .withPrompts({someAnswer: true});
+    return helpers.run(path.join(__dirname, '../generators/plugins')).withPrompts({ someAnswer: true });
   });
 
   it('creates files', () => {
-    assert.file([
-      'dummyfile.txt'
-    ]);
+    assert.file(['dummyfile.txt']);
   });
 });

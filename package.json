@@ -40,12 +40,7 @@
   "scripts": {
     "prepublish": "nsp check",
     "pretest": "eslint .",
-    "precommit": "lint-staged",
     "test": "jest"
-  },
-  "lint-staged": {
-    "generators/*/index.js": ["eslint --fix", "git add"],
-    "*.json": ["prettier --write", "git add"]
   },
   "prettier": {
     "tabWidth": 2,
