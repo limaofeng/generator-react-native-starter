@@ -45,7 +45,10 @@ module.exports = class extends Generator {
       this._blocks[file] = this._blocks[file] || {};
       this._blocks[file][key] = value;
     }
-    return this._blocks[file] || {};
+    return key => {
+      console.log(this._blocks[file]);
+      return this._blocks[file] && this._blocks[file][key];
+    };
   }
   prompting() {
     // Have Yeoman greet the user.
@@ -111,6 +114,20 @@ module.exports = class extends Generator {
     });
   }
 
+  configuring() {
+    // Plugins
+    this.composeWith(require.resolve('../plugins'), { base: this });
+
+    // IOS
+    this.composeWith(require.resolve('../ios'), { base: this });
+
+    // Fastlane
+    this.composeWith(require.resolve('../fastlane'), { base: this });
+
+    // Git
+    this.composeWith(require.resolve('../git'), { base: this });
+  }
+
   writing() {
     // Package
     this.fs.copy(this.templatePath('package.json'), this.destinationPath('package.json'));
@@ -122,24 +139,15 @@ module.exports = class extends Generator {
 
     // Config
     this.fs.copy(this.templatePath('config'), this.destinationPath('config'));
+    this.fs.copyTpl(this.templatePath('config/jest/setupTests.js'), this.destinationPath('config/jest/setupTests.js'), {
+      block: this.blocks('config/jest/setupTests.js')
+    });
 
     // Source
     this.fs.copy(this.templatePath('src'), this.destinationPath('src'));
 
     // WallabyJS
     this.fs.copy(this.templatePath('wallaby.js'), this.destinationPath('wallaby.js'));
-
-    // Plugins
-    const plugins = this.composeWith(require.resolve('../plugins'), { base: this });
-
-    // IOS
-    this.composeWith(require.resolve('../ios'), { base: this });
-
-    // Fastlane
-    this.composeWith(require.resolve('../fastlane'), { base: this });
-
-    // Git
-    this.composeWith(require.resolve('../git'), { base: this });
 
     // APP Info
     this.fs.copyTpl(this.templatePath('app.json'), this.destinationPath('app.json'), {
@@ -149,6 +157,16 @@ module.exports = class extends Generator {
     // Index.js
     this.fs.copyTpl(this.templatePath('index.js'), this.destinationPath('index.js'), {
       project: this.props.project
+    });
+
+    // Utils
+    this.fs.copyTpl(this.templatePath('src/utils/index.js'), this.destinationPath('src/utils/index.js'), {
+      block: this.blocks('src/utils/index.js')
+    });
+
+    // App.js
+    this.fs.copyTpl(this.templatePath('src/App.js'), this.destinationPath('src/App.js'), {
+      block: this.blocks('src/App.js')
     });
 
     // License

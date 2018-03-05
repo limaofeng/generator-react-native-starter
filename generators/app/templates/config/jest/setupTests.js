@@ -4,6 +4,8 @@ import React from 'react';
 import ReactEnzymeAdapter from 'enzyme-adapter-react-16';
 import Enzyme from 'enzyme';
 
+<%-block('mocks')%>
+
 jest.mock('Linking', () => ({
   addEventListener: jest.fn(),
   removeEventListener: jest.fn(),

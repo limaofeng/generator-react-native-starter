@@ -1,15 +1,13 @@
 import { StackNavigator } from 'react-navigation';
+import kharak from 'react-native-kharak';
 
-import HomeScreen from './Home';
-import SettingsScreen from './Settings';
+<%- block('local-imports') %>
 
-const RootNavigator = StackNavigator({
-  Home: {
-    screen: HomeScreen
-  },
-  Settings: {
-    screen: SettingsScreen
-  }
+<%- block('functions') %>
+
+import modules from './modules';
+
+export default kharak({
+  reducers: modules.reducers,
+  routes: modules.routes
 });
-
-export default RootNavigator;

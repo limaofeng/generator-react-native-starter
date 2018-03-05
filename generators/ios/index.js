@@ -32,7 +32,8 @@ module.exports = class extends Generator {
   writing() {
     const { project } = this.props;
     this.fs.copyTpl(this.templatePath('Podfile'), this.destinationPath('ios/Podfile'), {
-      project
+      project,
+      block: this.base.blocks('ios/Podfile')
     });
     this.fs.copyTpl(this.templatePath('vpser'), this.destinationPath(`ios/${project.name}`), { project });
     this.fs.copyTpl(this.templatePath('vpser.xcodeproj'), this.destinationPath(`ios/${project.name}.xcodeproj`), {
