@@ -4,7 +4,17 @@ import React from 'react';
 import ReactEnzymeAdapter from 'enzyme-adapter-react-16';
 import Enzyme from 'enzyme';
 
-<%-block('mocks')%>
+import AsyncStorage from './AsyncStorage';
+
+jest.mock('NativeModules', () => ({
+<%-block('mocks-NativeModules')%>
+  SourceCode: {
+    scriptURL: null
+  }
+}));
+
+const storage = new AsyncStorage();
+jest.doMock('AsyncStorage', () => storage);
 
 jest.mock('Linking', () => ({
   addEventListener: jest.fn(),
@@ -21,7 +31,7 @@ jest.mock('ScrollView', () => {
   }
   return ScrollView;
 });
-
+<%-block('mocks')%>
 const { setState } = React.Component.prototype;
 Object.defineProperty(React.Component.prototype, 'setState', {
   value() {

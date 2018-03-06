@@ -1,4 +1,3 @@
-jest.mock('NativeModules', () => ({
   RNVectorIconsManager: {
     getImageForFont: jest.fn(),
     loadFontWithFileName: jest.fn()
@@ -6,5 +5,4 @@ jest.mock('NativeModules', () => ({
   RNVectorIconsModule: {
     getImageForFont: jest.fn(),
     loadFontWithFileName: jest.fn()
-  }
-}));
+  },
