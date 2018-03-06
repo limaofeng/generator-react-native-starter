@@ -76,9 +76,6 @@ module.exports = class extends Generator {
 
   writing() {
     const { baseUrl, name } = this.props;
-    console.log(this.props, baseUrl + '/' + name);
     this.fs.copy(this.sourceRoot(), baseUrl + '/' + name);
   }
-
-  install() {}
 };

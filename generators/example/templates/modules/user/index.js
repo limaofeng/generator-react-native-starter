@@ -11,5 +11,15 @@ export default new Feature({
     Profile: {
       screen: ProfileScreen
     }
+  },
+  namespace: 'auth',
+  state: { isLoggedIn: false },
+  reducer: {
+    login(state) {
+      return { ...state, isLoggedIn: true };
+    },
+    logout(state) {
+      return { ...state, isLoggedIn: false };
+    }
   }
 });

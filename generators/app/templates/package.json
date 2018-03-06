@@ -16,9 +16,12 @@
   },
   "dependencies": {
     "react": "^16.3.0-alpha.1",
-    "react-native": "^0.54.0"
+    "react-native": "^0.54.0",
+    "react-native-kharak":"^1.2.1",
+    "redux-logger": "^3.0.6"
   },
   "devDependencies": {
+    "babel-core": "^6.26.0",
     "babel-eslint": "^8.2.2",
     "babel-preset-react-native-stage-0": "^1.0.1",
     "enzyme": "^3.3.0",
@@ -80,20 +83,18 @@
     },
     "rules": {
       "indent": 0,
+      "semi": 2,
+      "max-len": [2, 120, 4],
       "space-before-function-paren": 0,
       "prettier/prettier": "error",
       "global-require": "off",
       "comma-dangle": 0,
+      "arrow-parens": ["error", "as-needed"],
+      "consistent-return": 0,
       "no-restricted-syntax": 0,
       "no-use-before-define": 0,
       "no-param-reassign": "warn",
-      "object-curly-newline": "off",
-      "function-paren-newline": "off",
-      "react/prefer-stateless-function": "off",
       "no-console": 1,
-      "max-len": [2, 120, 4],
-      "arrow-parens": ["error", "as-needed"],
-      "consistent-return": 0,
       "no-confusing-arrow": 0,
       "no-shadow": 0,
       "no-underscore-dangle": 0,
@@ -105,7 +106,15 @@
           "allowForLoopAfterthoughts": true
         }
       ],
-      "semi": 2,
+      "object-curly-newline": "off",
+      "function-paren-newline": "off",
+      "generator-star-spacing": [
+        "error",
+        {
+          "before": true,
+          "after": false
+        }
+      ],
       "import/no-extraneous-dependencies": 0,
       "import/prefer-default-export": 0,
       "import/no-duplicates": 0,
@@ -121,6 +130,7 @@
       "react/no-multi-comp": 0,
       "react/no-array-index-key": [1],
       "react/forbid-prop-types": 0,
+      "react/prefer-stateless-function": "off",
       "react/jsx-filename-extension": [
         1,
         {

@@ -9,8 +9,8 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
+    backgroundColor: '#F5FCFF'
+  }
 });
 
 const MainScreen = () => (
@@ -21,7 +21,7 @@ const MainScreen = () => (
 );
 
 MainScreen.navigationOptions = {
-  title: 'Home Screen',
+  title: 'Home Screen'
 };
 
 export default MainScreen;

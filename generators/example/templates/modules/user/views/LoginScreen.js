@@ -7,36 +7,29 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#F5FCFF',
+    backgroundColor: '#F5FCFF'
   },
   welcome: {
     fontSize: 20,
     textAlign: 'center',
-    margin: 10,
-  },
+    margin: 10
+  }
 });
 
 const LoginScreen = ({ navigation }) => (
   <View style={styles.container}>
-    <Text style={styles.welcome}>
-      Screen A
-    </Text>
-    <Text style={styles.instructions}>
-      This is great
-    </Text>
-    <Button
-      onPress={() => navigation.dispatch({ type: 'Login' })}
-      title="Log in"
-    />
+    <Text style={styles.welcome}>Screen A</Text>
+    <Text style={styles.instructions}>This is great</Text>
+    <Button onPress={() => navigation.dispatch({ type: 'auth/login' })} title="Log in" />
   </View>
 );
 
 LoginScreen.propTypes = {
-  navigation: PropTypes.object.isRequired,
+  navigation: PropTypes.object.isRequired
 };
 
 LoginScreen.navigationOptions = {
-  title: 'Log In',
+  title: 'Log In'
 };
 
 export default LoginScreen;

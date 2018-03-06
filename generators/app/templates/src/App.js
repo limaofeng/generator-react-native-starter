@@ -1,13 +1,13 @@
-import { StackNavigator } from 'react-navigation';
+import logger from 'redux-logger';
 import kharak from 'react-native-kharak';
 
 <%- block('local-imports') %>
+import modules from './modules';
 
 <%- block('functions') %>
 
-import modules from './modules';
-
 export default kharak({
   reducers: modules.reducers,
-  routes: modules.routes
+  routes: modules.routes,
+  middlewares: [logger]
 });

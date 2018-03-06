@@ -27,11 +27,8 @@ export default new Feature({
   },
   effects: {
     *addDelay(action, { call, put }) {
-      console.log('wait', Date.now());
       yield call(delay, 1000);
-      console.log('done', Date.now());
       yield put({ type: 'count/add' });
-      console.log('count/add');
     }
   }
 });

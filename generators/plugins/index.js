@@ -17,11 +17,6 @@ module.exports = class extends Generator {
         message: '选择需要安装的插件',
         choices: [
           {
-            name: 'react-navigation',
-            value: 'react-navigation',
-            checked: true
-          },
-          {
             name: 'react-native-vector-icons',
             value: 'react-native-vector-icons',
             checked: false

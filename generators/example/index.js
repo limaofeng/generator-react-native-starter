@@ -17,6 +17,6 @@ module.exports = class extends Generator {
   }
 
   writing() {
-    // This.fs.copy(this.templatePath('dummyfile.txt'), this.destinationPath('dummyfile.txt'));
+    this.fs.copy(this.sourceRoot(), this.destinationPath('src/'));
   }
 };

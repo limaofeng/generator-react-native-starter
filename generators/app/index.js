@@ -46,7 +46,6 @@ module.exports = class extends Generator {
       this._blocks[file][key] = value;
     }
     return key => {
-      console.log(this._blocks[file]);
       return this._blocks[file] && this._blocks[file][key];
     };
   }
@@ -123,6 +122,9 @@ module.exports = class extends Generator {
 
     // Fastlane
     this.composeWith(require.resolve('../fastlane'), { base: this });
+
+    // Example
+    this.composeWith(require.resolve('../example'), { base: this });
 
     // Git
     this.composeWith(require.resolve('../git'), { base: this });
