@@ -7,7 +7,7 @@ import Enzyme from 'enzyme';
 import AsyncStorage from './AsyncStorage';
 
 jest.mock('NativeModules', () => ({
-<%-block('mocks-NativeModules')%>
+<%- block('mocks-NativeModules') -%>
   SourceCode: {
     scriptURL: null
   }
@@ -31,7 +31,8 @@ jest.mock('ScrollView', () => {
   }
   return ScrollView;
 });
-<%-block('mocks')%>
+<%-block('mocks')-%>
+
 const { setState } = React.Component.prototype;
 Object.defineProperty(React.Component.prototype, 'setState', {
   value() {

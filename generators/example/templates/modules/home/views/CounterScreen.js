@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import { AppRegistry, StyleSheet, Text, View, Button, TouchableHighlight } from 'react-native';
+import React from 'react';
+import { StyleSheet, Text, View, TouchableHighlight } from 'react-native';
 import { connect } from 'react-redux';
 
 const CountScreen = connect(({ count }) => ({ count }))(props => {

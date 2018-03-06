@@ -1,3 +1,3 @@
-<%-block('imports')%>
+<%- block('imports') -%>
 
-<%-block('exports')%>
+<%- block('exports') -%>
