@@ -168,7 +168,8 @@ module.exports = class extends Generator {
 
     // App.js
     this.fs.copyTpl(this.templatePath('src/App.js'), this.destinationPath('src/App.js'), {
-      block: this.blocks('src/App.js')
+      block: this.blocks('src/App.js'),
+      project: this.props.project
     });
 
     // License

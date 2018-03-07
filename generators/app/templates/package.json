@@ -9,6 +9,7 @@
   },
   "scripts": {
     "precommit": "lint-staged",
+    "postinstall": "remotedev-debugger --hostname localhost --port 8000 --injectserver",
     "start": "react-native start",
     "android": "react-native run-android",
     "ios": "react-native run-ios --simulator \"iPhone X\"",
@@ -37,7 +38,9 @@
     "lint-staged": "^7.0.0",
     "prettier": "^1.11.1",
     "react-dom": "^16.3.0-alpha.1",
-    "react-test-renderer": "^16.3.0-alpha.1"
+    "react-test-renderer": "^16.3.0-alpha.1",
+    "remote-redux-devtools": "^0.5.12",
+    "remotedev-rn-debugger": "^0.8.3"
   },
   "prettier": {
     "tabWidth": 2,
