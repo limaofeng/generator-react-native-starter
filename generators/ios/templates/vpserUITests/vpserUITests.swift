@@ -24,11 +24,14 @@ class <%=project.name%>UITests: XCTestCase {
 
     func testExample() {
       let app = XCUIApplication()
+      snapshot("login")
+      app.buttons["Log in"].tap()
       snapshot("home")
-      app/*@START_MENU_TOKEN@*/.otherElements["去到设置."]/*[[".otherElements.matching(identifier: \"首页 去到设置.\").otherElements[\"去到设置.\"]",".otherElements[\"去到设置.\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
-      snapshot("settings")
-      app/*@START_MENU_TOKEN@*/.buttons["header-back"]/*[[".otherElements.matching(identifier: \"首页 去到设置. 测试截屏\").buttons[\"header-back\"]",".buttons[\"header-back\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
-
+      app.buttons["Counter"].tap()
+      snapshot("counter")
+      app.buttons["header-back"].tap()
+      app.buttons["Profile"].tap()
+      snapshot("profile")
     }
 
 }

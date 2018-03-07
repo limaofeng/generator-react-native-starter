@@ -47,12 +47,19 @@ module.exports = class extends Generator {
     this.fs.copyTpl(this.templatePath('vpser.xcworkspace'), this.destinationPath(`ios/${project.name}.xcworkspace`), {
       project
     });
-    this.fs.copyTpl(this.templatePath('vpserUITests'), this.destinationPath(`ios/${project.name}UITests`), {
-      project
-    });
-    this.fs.move(
-      this.destinationPath(`ios/${project.name}UITests/vpserUITests.swift`),
-      this.destinationPath(`ios/${project.name}UITests/${project.name}UITests.swift`)
+    this.fs.copyTpl(
+      this.templatePath('vpserUITests/Info.plist'),
+      this.destinationPath(`ios/${project.name}UITests/Info.plist`),
+      {
+        project
+      }
+    );
+    this.fs.copyTpl(
+      this.templatePath('vpserUITests/vpserUITests.swift'),
+      this.destinationPath(`ios/${project.name}UITests/${project.name}UITests.swift`),
+      {
+        project
+      }
     );
   }
   install() {
